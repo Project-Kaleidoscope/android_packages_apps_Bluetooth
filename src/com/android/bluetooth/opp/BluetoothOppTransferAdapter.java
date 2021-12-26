@@ -71,12 +71,12 @@ public class BluetoothOppTransferAdapter extends ResourceCursorAdapter {
         int status = cursor.getInt(cursor.getColumnIndexOrThrow(BluetoothShare.STATUS));
         int dir = cursor.getInt(cursor.getColumnIndexOrThrow(BluetoothShare.DIRECTION));
         if (BluetoothShare.isStatusError(status)) {
-            iv.setImageResource(android.R.drawable.stat_notify_error);
+            iv.setImageResource(R.drawable.kscope_bt_transfer_notify_error);
         } else {
             if (dir == BluetoothShare.DIRECTION_OUTBOUND) {
-                iv.setImageResource(android.R.drawable.stat_sys_upload_done);
+                iv.setImageResource(R.drawable.kscope_bt_transfer_upload_done);
             } else {
-                iv.setImageResource(android.R.drawable.stat_sys_download_done);
+                iv.setImageResource(R.drawable.kscope_bt_transfer_download_done);
             }
         }
 

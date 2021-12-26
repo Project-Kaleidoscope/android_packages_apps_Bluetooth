@@ -32,7 +32,6 @@
 
 package com.android.bluetooth.opp;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
@@ -53,13 +52,14 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.android.bluetooth.R;
+import com.android.settingslib.collapsingtoolbar.CollapsingToolbarBaseActivity;
 
 /**
  * View showing the user's finished bluetooth opp transfers that the user does
  * not confirm. Including outbound and inbound transfers, both successful and
  * failed. *
  */
-public class BluetoothOppTransferHistory extends Activity
+public class BluetoothOppTransferHistory extends CollapsingToolbarBaseActivity
         implements View.OnCreateContextMenuListener, OnItemClickListener {
     private static final String TAG = "BluetoothOppTransferHistory";
 
@@ -85,7 +85,7 @@ public class BluetoothOppTransferHistory extends Activity
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        setContentView(R.layout.bluetooth_transfers_page);
+        setContentView(R.layout.kscope_bt_transfers_page);
         mListView = (ListView) findViewById(R.id.list);
         mListView.setEmptyView(findViewById(R.id.empty));
 
@@ -135,7 +135,7 @@ public class BluetoothOppTransferHistory extends Activity
             mIdColumnId = mTransferCursor.getColumnIndexOrThrow(BluetoothShare._ID);
             // Create a list "controller" for the data
             mTransferAdapter =
-                    new BluetoothOppTransferAdapter(this, R.layout.bluetooth_transfer_item,
+                    new BluetoothOppTransferAdapter(this, R.layout.kscope_bt_transfer_item,
                             mTransferCursor);
             mListView.setAdapter(mTransferAdapter);
             mListView.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);

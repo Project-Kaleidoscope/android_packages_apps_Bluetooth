@@ -225,7 +225,7 @@
              android:excludeFromRecents="true"
              android:configChanges="orientation|keyboardHidden"
              android:enabled="@bool/profile_supported_opp"
-             android:theme="@android:style/Theme.DeviceDefault.Settings"
+             android:theme="@style/Theme.Bluetooth.Opp.TransferHistory"
              android:exported="true">
             <intent-filter>
                 <action android:name="com.android.bluetooth.action.TransferHistory"/>
