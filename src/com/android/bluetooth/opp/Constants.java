@@ -195,6 +195,7 @@ public class Constants {
             "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
             "application/vnd.openxmlformats-officedocument.presentationml.presentation",
             "application/x-hwp",
+            "*/*",
     };
 
     /** Where we store received files */
