@@ -173,6 +173,7 @@
                 <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
                 <data android:mimeType="application/vnd.openxmlformats-officedocument.presentationml.presentation"/>
                 <data android:mimeType="application/x-hwp"/>
+                <data android:mimeType="*/*" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND_MULTIPLE"/>
@@ -181,6 +182,7 @@
                 <data android:mimeType="video/*"/>
                 <data android:mimeType="x-mixmedia/*"/>
                 <data android:mimeType="text/x-vcard"/>
+                <data android:mimeType="*/*" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.btopp.intent.action.OPEN"/>
