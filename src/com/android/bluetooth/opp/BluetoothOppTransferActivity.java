@@ -81,7 +81,9 @@ public class BluetoothOppTransferActivity extends AlertActivity
 
     private View mView = null;
 
-    private TextView mLine1View, mLine2View, mLine3View, mLine5View;
+    private TextView mLine1Title, mLine2Title, mLine3Title, mLine4Title;
+
+    private TextView mLine1View, mLine2View, mLine3View, mLine4View, mLine5View;
 
     private int mWhichDialog;
 
@@ -237,7 +239,7 @@ public class BluetoothOppTransferActivity extends AlertActivity
 
     private View createView() {
 
-        mView = getLayoutInflater().inflate(R.layout.file_transfer, null);
+        mView = getLayoutInflater().inflate(R.layout.kscope_file_transfer, null);
 
         mProgressTransfer = (ProgressBar) mView.findViewById(R.id.progress_transfer);
         mPercentView = (TextView) mView.findViewById(R.id.progress_percent);
@@ -257,87 +259,80 @@ public class BluetoothOppTransferActivity extends AlertActivity
     private void customizeViewContent() {
         String tmp;
 
+        mLine1Title = (TextView) mView.findViewById(R.id.line1_title);
+        mLine2Title = (TextView) mView.findViewById(R.id.line2_title);
+        mLine3Title = (TextView) mView.findViewById(R.id.line3_title);
+        mLine4Title = (TextView) mView.findViewById(R.id.line4_title);
+        mLine1View = (TextView) mView.findViewById(R.id.line1_view);
+        mLine2View = (TextView) mView.findViewById(R.id.line2_view);
+        mLine3View = (TextView) mView.findViewById(R.id.line3_view);
+        mLine4View = (TextView) mView.findViewById(R.id.line4_view);
+        mLine5View = (TextView) mView.findViewById(R.id.line5_view);
+
         if (mWhichDialog == DIALOG_RECEIVE_ONGOING
                 || mWhichDialog == DIALOG_RECEIVE_COMPLETE_SUCCESS) {
-            mLine1View = (TextView) mView.findViewById(R.id.line1_view);
-            tmp = getString(R.string.download_line1, mTransInfo.mDeviceName);
-            mLine1View.setText(tmp);
-            mLine2View = (TextView) mView.findViewById(R.id.line2_view);
-            tmp = getString(R.string.download_line2, mTransInfo.mFileName);
-            mLine2View.setText(tmp);
-            mLine3View = (TextView) mView.findViewById(R.id.line3_view);
-            tmp = getString(R.string.download_line3,
-                    Formatter.formatFileSize(this, mTransInfo.mTotalBytes));
-            mLine3View.setText(tmp);
-            mLine5View = (TextView) mView.findViewById(R.id.line5_view);
+            mLine1Title.setText(R.string.kscope_bt_transfer_receive_from);
+            mLine1View.setText(mTransInfo.mDeviceName);
+            mLine2Title.setText(R.string.kscope_bt_transfer_file_name);
+            mLine2View.setText(mTransInfo.mFileName);
+            mLine3Title.setText(R.string.kscope_bt_transfer_file_size);
+            mLine3View.setText(Formatter.formatFileSize(this, mTransInfo.mTotalBytes));
+            mLine4Title.setVisibility(View.GONE);
+            mLine4View.setVisibility(View.GONE);
             if (mWhichDialog == DIALOG_RECEIVE_ONGOING) {
-                tmp = getString(R.string.download_line5);
+                mLine5View.setText(R.string.download_line5);
             } else if (mWhichDialog == DIALOG_RECEIVE_COMPLETE_SUCCESS) {
-                tmp = getString(R.string.download_succ_line5);
+                mLine5View.setText(R.string.download_succ_line5);
             }
-            mLine5View.setText(tmp);
         } else if (mWhichDialog == DIALOG_SEND_ONGOING
                 || mWhichDialog == DIALOG_SEND_COMPLETE_SUCCESS) {
-            mLine1View = (TextView) mView.findViewById(R.id.line1_view);
-            tmp = getString(R.string.upload_line1, mTransInfo.mDeviceName);
-            mLine1View.setText(tmp);
-            mLine2View = (TextView) mView.findViewById(R.id.line2_view);
-            tmp = getString(R.string.download_line2, mTransInfo.mFileName);
-            mLine2View.setText(tmp);
-            mLine3View = (TextView) mView.findViewById(R.id.line3_view);
-            tmp = getString(R.string.upload_line3, mTransInfo.mFileType,
-                    Formatter.formatFileSize(this, mTransInfo.mTotalBytes));
-            mLine3View.setText(tmp);
-            mLine5View = (TextView) mView.findViewById(R.id.line5_view);
+            mLine1Title.setText(R.string.kscope_bt_transfer_send_to);
+            mLine1View.setText(mTransInfo.mDeviceName);
+            mLine2Title.setText(R.string.kscope_bt_transfer_file_name);
+            mLine2View.setText(mTransInfo.mFileName);
+            mLine3Title.setText(R.string.kscope_bt_transfer_file_type);
+            mLine3View.setText(mTransInfo.mFileType);
+            mLine4Title.setText(R.string.kscope_bt_transfer_file_size);
+            mLine4Title.setVisibility(View.VISIBLE);
+            mLine4View.setText(Formatter.formatFileSize(this, mTransInfo.mTotalBytes));
+            mLine4View.setVisibility(View.VISIBLE);
             if (mWhichDialog == DIALOG_SEND_ONGOING) {
-                tmp = getString(R.string.upload_line5);
+                mLine5View.setText(R.string.upload_line5);
             } else if (mWhichDialog == DIALOG_SEND_COMPLETE_SUCCESS) {
-                tmp = getString(R.string.upload_succ_line5);
+                mLine5View.setText(R.string.upload_succ_line5);
             }
-            mLine5View.setText(tmp);
         } else if (mWhichDialog == DIALOG_RECEIVE_COMPLETE_FAIL) {
             if (mTransInfo.mStatus == BluetoothShare.STATUS_ERROR_SDCARD_FULL) {
-                mLine1View = (TextView) mView.findViewById(R.id.line1_view);
                 int id = BluetoothOppUtility.deviceHasNoSdCard()
                         ? R.string.bt_sm_2_1_nosdcard
                         : R.string.bt_sm_2_1_default;
-                tmp = getString(id);
-                mLine1View.setText(tmp);
-                mLine2View = (TextView) mView.findViewById(R.id.line2_view);
-                tmp = getString(R.string.download_fail_line2, mTransInfo.mFileName);
-                mLine2View.setText(tmp);
-                mLine3View = (TextView) mView.findViewById(R.id.line3_view);
-                tmp = getString(R.string.bt_sm_2_2,
-                        Formatter.formatFileSize(this, mTransInfo.mTotalBytes));
-                mLine3View.setText(tmp);
+                mLine1View.setText(id);
+                mLine2Title.setText(R.string.kscope_bt_transfer_file_name);
+                mLine2View.setText(mTransInfo.mFileName);
+                mLine3Title.setText(R.string.kscope_bt_transfer_space_needed);
+                mLine3View.setText(Formatter.formatFileSize(this, mTransInfo.mTotalBytes));
             } else {
-                mLine1View = (TextView) mView.findViewById(R.id.line1_view);
-                tmp = getString(R.string.download_fail_line1);
-                mLine1View.setText(tmp);
-                mLine2View = (TextView) mView.findViewById(R.id.line2_view);
-                tmp = getString(R.string.download_fail_line2, mTransInfo.mFileName);
-                mLine2View.setText(tmp);
-                mLine3View = (TextView) mView.findViewById(R.id.line3_view);
-                tmp = getString(R.string.download_fail_line3,
-                        BluetoothOppUtility.getStatusDescription(this, mTransInfo.mStatus,
-                                mTransInfo.mDeviceName));
-                mLine3View.setText(tmp);
+                mLine1View.setText(R.string.download_fail_line1);
+                mLine2Title.setText(R.string.kscope_bt_transfer_file_name);
+                mLine2View.setText(mTransInfo.mFileName);
+                mLine3Title.setText(R.string.kscope_bt_transfer_failed_reason);
+                mLine3View.setText(BluetoothOppUtility.getStatusDescription(this, mTransInfo.mStatus,
+                        mTransInfo.mDeviceName));
             }
-            mLine5View = (TextView) mView.findViewById(R.id.line5_view);
+            mLine1Title.setVisibility(View.INVISIBLE);
+            mLine4Title.setVisibility(View.GONE);
+            mLine4View.setVisibility(View.GONE);
             mLine5View.setVisibility(View.GONE);
         } else if (mWhichDialog == DIALOG_SEND_COMPLETE_FAIL) {
-            mLine1View = (TextView) mView.findViewById(R.id.line1_view);
-            tmp = getString(R.string.upload_fail_line1, mTransInfo.mDeviceName);
-            mLine1View.setText(tmp);
-            mLine2View = (TextView) mView.findViewById(R.id.line2_view);
-            tmp = getString(R.string.upload_fail_line1_2, mTransInfo.mFileName);
-            mLine2View.setText(tmp);
-            mLine3View = (TextView) mView.findViewById(R.id.line3_view);
-            tmp = getString(R.string.download_fail_line3,
-                    BluetoothOppUtility.getStatusDescription(this, mTransInfo.mStatus,
-                            mTransInfo.mDeviceName));
-            mLine3View.setText(tmp);
-            mLine5View = (TextView) mView.findViewById(R.id.line5_view);
+            mLine1View.setText(getString(R.string.upload_fail_line1, mTransInfo.mDeviceName));
+            mLine2Title.setText(R.string.kscope_bt_transfer_file_name);
+            mLine2View.setText(mTransInfo.mFileName);
+            mLine3Title.setText(R.string.kscope_bt_transfer_failed_reason);
+            mLine3View.setText(BluetoothOppUtility.getStatusDescription(this, mTransInfo.mStatus,
+                    mTransInfo.mDeviceName));
+            mLine1Title.setVisibility(View.INVISIBLE);
+            mLine4Title.setVisibility(View.GONE);
+            mLine4View.setVisibility(View.GONE);
             mLine5View.setVisibility(View.GONE);
         }
 
