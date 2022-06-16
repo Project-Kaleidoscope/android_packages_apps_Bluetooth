@@ -16,6 +16,6 @@
 
 <resources>
 
-    <style name="dialog" parent="android:style/Theme.Material.Dialog.Alert" />
+    <style name="dialog" parent="android:Theme.DeviceDefault.Dialog.Alert" />
 
 </resources>

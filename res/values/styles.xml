@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2014 The Android Open Source Project
+                   2022 Project Kaleidoscope
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -45,6 +46,6 @@
         <item name="android:textColor">@*android:color/primary_text_default_material_light</item>
     </style>
 
-    <style name="dialog" parent="android:style/Theme.Material.Light.Dialog.Alert" />
+    <style name="dialog" parent="android:Theme.DeviceDefault.Light.Dialog.Alert" />
 
 </resources>
